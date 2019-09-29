@@ -9,6 +9,7 @@ class Post extends Model {
         description: Sequelize.STRING,
         hashtags: Sequelize.STRING,
         link: Sequelize.STRING,
+        active: Sequelize.BOOLEAN,
       },
       {
         sequelize,
