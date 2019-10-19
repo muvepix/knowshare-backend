@@ -2,7 +2,7 @@ import Post from '../models/Post';
 
 class PostController {
   async index(req, res) {
-    const posts = await Post.findAll({
+    const posts = await Post.find({
       where: { active: 1 },
     });
 

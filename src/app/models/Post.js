@@ -1,23 +1,35 @@
-import Sequelize, { Model } from 'sequelize';
+import mongoose from 'mongoose';
 
-class Post extends Model {
-  static init(sequelize) {
-    super.init(
-      {
-        title: Sequelize.STRING,
-        author: Sequelize.STRING,
-        description: Sequelize.STRING,
-        hashtags: Sequelize.STRING,
-        link: Sequelize.STRING,
-        active: Sequelize.BOOLEAN,
-      },
-      {
-        sequelize,
-      }
-    );
-
-    return this;
+const PostSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    hashtags: {
+      type: String,
+      required: true,
+    },
+    link: {
+      type: String,
+      required: true,
+    },
+    active: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
   }
-}
+);
 
-export default Post;
+export default mongoose.model('Post', PostSchema);
