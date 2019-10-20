@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
@@ -9,7 +10,6 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
       required: true,
       lowercase: true,
     },
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.pre('save', async next => {
+UserSchema.pre('save', async function(next) {
   const hash = await bcrypt.hash(this.password, 8);
   this.password = hash;
 

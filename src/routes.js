@@ -8,6 +8,8 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
+routes.get('/', (req, res) => res.redirect('https://knowshare.netlify.com'));
+
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 routes.get('/posts', PostController.index);
