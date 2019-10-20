@@ -15,7 +15,7 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     hashtags: {
-      type: String,
+      type: [String],
       required: true,
     },
     link: {
@@ -25,7 +25,20 @@ const PostSchema = new mongoose.Schema(
     active: {
       type: String,
       required: true,
+      default: 1,
     },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    dislikes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,
