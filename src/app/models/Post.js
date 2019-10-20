@@ -1,48 +1,23 @@
-import mongoose from 'mongoose';
+import Sequelize, { Model } from 'sequelize';
 
-const PostSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    hashtags: {
-      type: [String],
-      required: true,
-    },
-    link: {
-      type: String,
-      required: true,
-    },
-    active: {
-      type: String,
-      required: true,
-      default: 1,
-    },
-    likes: [
+class Post extends Model {
+  static init(sequelize) {
+    super.init(
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        title: Sequelize.STRING,
+        author: Sequelize.STRING,
+        description: Sequelize.STRING,
+        hashtags: Sequelize.STRING,
+        link: Sequelize.STRING,
+        active: Sequelize.BOOLEAN,
       },
-    ],
-    dislikes: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
-  },
-  {
-    timestamps: true,
+        sequelize,
+      }
+    );
+
+    return this;
   }
-);
+}
 
-export default mongoose.model('Post', PostSchema);
+export default Post;

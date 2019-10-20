@@ -1,33 +1,32 @@
-/* eslint-disable func-names */
-import mongoose from 'mongoose';
+import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
-const UserSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      lowercase: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
+class User extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        name: Sequelize.STRING,
+        email: Sequelize.STRING,
+        password: Sequelize.VIRTUAL,
+        password_hash: Sequelize.STRING,
+      },
+      {
+        sequelize,
+      }
+    );
+
+    this.addHook('beforeSave', async user => {
+      if (user.password) {
+        user.password_hash = await bcrypt.hash(user.password, 8);
+      }
+    });
+
+    return this;
   }
-);
 
-UserSchema.pre('save', async function(next) {
-  const hash = await bcrypt.hash(this.password, 8);
-  this.password = hash;
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
+}
 
-  next();
-});
-
-export default mongoose.model('User', UserSchema);
+export default User;
