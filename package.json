@@ -1,13 +1,12 @@
 {
-  "name": "template-node",
+  "name": "knowshare-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "prestart": "yarn sequelize db:migrate",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
