@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "prestart": "npx sequelize db:migrate",
     "start": "node dist/server.js"
   },
   "dependencies": {
