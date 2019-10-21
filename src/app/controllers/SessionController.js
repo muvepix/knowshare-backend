@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 
 import User from '../models/User';
 import authConfig from '../../config/auth';
@@ -14,7 +13,7 @@ class SessionController {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    if (!(await bcrypt.compare(password, user.password))) {
+    if (!(await user.checkPassword(password))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
