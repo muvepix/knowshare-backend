@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
       },
       hashtags: {
-        type: Sequelize.ARRAY[Sequelize.STRING],
+        type: Sequelize.STRING,
         allowNull: true,
       },
       link: {
